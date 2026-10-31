@@ -50,6 +50,7 @@
             padding: 0.8rem 2rem;
             background: rgba(22, 24, 29, 0.85);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid var(--card-border);
             border-radius: 50px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -92,13 +93,42 @@
             color: var(--primary-gold);
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--primary-gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1003;
+        }
+
+        /* Overlay Gelap Sidebar Mobile */
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1001;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* ===== HERO SECTION ===== */
         .hero {
             min-height: auto; 
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 6rem 1.5rem 3rem 1.5rem;
+            padding: 8rem 1.5rem 3rem 1.5rem;
         }
 
         .hero-content {
@@ -295,21 +325,6 @@
             margin-bottom: 1.2rem;
         }
 
-        .exp-gallery img {
-            width: 90px;
-            height: 65px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid var(--card-border);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-
-        .exp-gallery img:hover {
-            transform: scale(1.05);
-            border-color: var(--primary-gold);
-        }
-
         /* ===== CERTIFICATES ===== */
         .cert-grid {
             display: grid;
@@ -395,7 +410,7 @@
             border: 1px solid var(--card-border);
         }
 
-        /* ===== MODAL POPUP (CENTRAL) ===== */
+        /* ===== MODAL POPUP ===== */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -404,6 +419,7 @@
             height: 100%;
             background: rgba(13, 14, 18, 0.85);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -517,45 +533,105 @@
             border-top: 1px solid var(--card-border);
         }
 
+        /* ===== MEDIA QUERIES (MOBILE OPTIMIZATION) ===== */
         @media (max-width: 768px) {
-        .hero {
-            padding: 5rem 1rem 2rem 1rem; 
-        }
+            nav {
+                width: 92%;
+                padding: 0.8rem 1.5rem;
+            }
 
-        .hero-content {
-            grid-template-columns: 1fr;
-            text-align: center;
-            gap: 1.5rem; 
-        }
+            .menu-toggle {
+                display: block;
+            }
 
-        .hero-image-container {
-            order: -1; 
-            margin-bottom: 0.5rem;
-        }
+            /* Perbaikan Interaksi Sidebar Glassmorphism */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 270px;
+                height: 100vh;
+                background: rgba(22, 24, 29, 0.95);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                border-left: 1px solid var(--card-border);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 2rem;
+                z-index: 1002;
+                transition: right 0.35s ease;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+                pointer-events: none; /* Cegah halangan saat tersembunyi */
+            }
 
-        /* Mengatur ukuran foto profil khusus HP */
-        .hero-image {
-            max-width: 150px;
-            aspect-ratio: 1/1; 
-            border-radius: 50%;
-            border: 3px solid var(--primary-gold);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            .nav-links.active {
+                right: 0;
+                pointer-events: auto; /* Aktifkan klik saat dibuka */
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-links a {
+                font-size: 1.15rem;
+                font-weight: 600;
+                display: block;
+                padding: 0.8rem 1rem;
+                color: var(--text-main);
+            }
+
+            .hero {
+                padding: 7rem 1rem 2rem 1rem; 
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 1.5rem; 
+            }
+
+            .hero-image-container {
+                order: -1; 
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-image {
+                max-width: 150px;
+                aspect-ratio: 1/1; 
+                border-radius: 50%;
+                border: 3px solid var(--primary-gold);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
         }
-    }
     </style>
 </head>
 <body>
+
+    <!-- Overlay Gelap -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMenu()"></div>
 
     <!-- Navigation -->
     <nav>
         <div class="nav-content">
             <a href="#home" class="logo">Sulastri<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#certificates">Sertifikat</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
+            
+            <button class="menu-toggle" onclick="toggleMenu()" aria-label="Toggle menu">
+                <i class="fa-solid fa-bars" id="menuIcon"></i>
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+                <li><a href="#certificates" onclick="closeMenu()">Sertifikat</a></li>
+                <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -581,11 +657,10 @@
         </div>
     </section>
 
-    <!-- Experience Section (IT Support Update) -->
+    <!-- Experience Section -->
     <section class="section" id="experience">
         <h2 class="section-title">Pengalaman Kerja</h2>
         <div class="experience-timeline">
-            
             <div class="experience-item">
                 <div class="exp-card">
                     <h3 class="exp-title">Pegadaian Digital Representative</h3>
@@ -593,22 +668,8 @@
                     <p class="exp-description">
                         Bertanggung jawab dalam mendampingi registrasi dan pendataan nasabah pada aplikasi digital Pegadaian Digital Service (PDS) & TRING!. Melakukan validasi awal data pengguna, pengujian alur transaksi manual (Manual Functional Testing), serta mendokumentasikan kendala (bugs/UX friction) yang dihadapi pengguna akhir untuk diserahkan ke tim IT developer.
                     </p>
-                    <!-- <div class="exp-gallery">
-                        <img src="img/pegadaian1.jpg" alt="Dokumentasi Lapangan" onclick="openModal('Foto Dokumentasi Lapangan', 'img/pegadaian1.jpg', 'Kegiatan pendampingan teknis, edukasi aplikasi digital Pegadaian Digital Service (PDS) & TRING! di lapangan, serta validasi data awal nasabah.')">
-                    </div> -->
                 </div>
             </div>
-
-            <!-- <div class="experience-item">
-                <div class="exp-card">
-                    <h3 class="exp-title">Data Preprocessing & System Log Analysis</h3>
-                    <span class="exp-company">Riset Akademis Independen</span>
-                    <p class="exp-description">
-                        Membangun alur prapemrosesan teks keluhan dan log sistem secara terstruktur untuk mengklasifikasikan masalah pengguna. Memastikan data input bersih dan valid untuk analisis performa layanan sistem digital.
-                    </p>
-                </div>
-            </div> -->
-
         </div>
     </section>
 
@@ -616,7 +677,6 @@
     <section class="section" id="certificates">
         <h2 class="section-title">Sertifikasi & Lisensi</h2>
         <div class="cert-grid">
-            
             <div class="cert-card" onclick="openModal('Sertifikat Magang PT Pegadaian', 'https://lh3.googleusercontent.com/d/1VuXP5-Ezot6DwttZF4owUk41mILkIhoi', 'Sertifikat penyelesaian program magang di bidang digitalisasi dan dukungan operasional IT Pegadaian.')">
                 <i class="fa-solid fa-award"></i>
                 <h3>MAGENTA Internship</h3>
@@ -628,34 +688,36 @@
                 <h3>MTCNA Certified</h3>
                 <p>MikroTik Certified Network Associate</p>
             </div>
+
             <div class="cert-card" onclick="openModal('BNSP (Network Administrator Madya)', 'https://lh3.googleusercontent.com/d/1TaAgPd3T1VBwiX5pCShmdKxcD9yoc7l8', 'Sertifikasi kompetensi resmi dari BNSP untuk bidang Network Administrator Madya, membuktikan keahlian dalam perancangan, pengelolaan, dan troubleshooting infrastruktur jaringan komputer skala menengah hingga besar.')">
                 <i class="fa-solid fa-server"></i>
                 <h3>Network Administrator Madya</h3>
                 <p>BNSP (Badan Nasional Sertifikasi Profesi)</p>
             </div>
-            <div class="cert-card" onclick="openModal('Zahir (Sistem Basis Data)', 'https://lh3.googleusercontent.com/d/1hFd_dhB1TPhVA6WEXjYyEzJc6s328Mjd', 'Sertifikasi kompetensi dalam pengelolaan basis data.')">
+
+            <div class="cert-card" onclick="openModal('Zahir (Sistem Basis Data)', 'https://lh3.googleusercontent.com/d/1hFd_dhB1TPhVA6WEXjYyEzJc6s328Mjd', 'Sertifikasi kompetensi dalam pengelolaan basis data dan pengoperasian sistem aplikasi akuntansi Zahir.')">
                 <i class="fa-solid fa-database"></i>
                 <h3>Zahir Basis Data</h3>
                 <p>Pengelolaan & Administrasi Database</p>
             </div>
+
             <div class="cert-card" onclick="openModal('PCAP: Programming Essentials in Python', 'https://lh3.googleusercontent.com/d/1EDwU0BgBgzfIE09kTCgV9Tg8qwWJ4hAL', 'Sertifikasi tingkat Associate dari Python Institute yang menguji pemahaman mendalam tentang pemrograman berorientasi objek (OOP), struktur data, penanganan eksepsi (exception handling), pengolahan modul & paket, serta operasi file di Python.')">
                 <i class="fa-brands fa-python"></i>
                 <h3>PCAP™ Certified</h3>
                 <p>Certified Associate in Python Programming</p>
             </div>
+
             <div class="cert-card" onclick="openModal('IT Bootcamp (Software Development)', 'https://lh3.googleusercontent.com/d/1BXpiJ0IE1TZvdB9gfzXSiy-0a0NLqgqU', 'Sertifikat kelulusan intensive IT Bootcamp Software Development, mencakup pengembangan aplikasi web, penerapan logika pemrograman, serta kolaborasi tim menggunakan version control.')">
                 <i class="fa-solid fa-laptop-code"></i>
                 <h3>Software Development Bootcamp</h3>
                 <p>Intensive IT Training & Project Development</p>
             </div>
-            <div class="cert-card" onclick="openModal('TOELF (Prediction Test)', 'https://lh3.googleusercontent.com/d/1_V3V2RuNsykYApkNeqtAEdifmbmjdj5a', 'Sertifikat kemampuan bahasa Inggris formal yang menunjukkan penguasaan tata bahasa, kemampuan mendengar, dan pemahaman bacaan standar profesional.')">
+
+            <div class="cert-card" onclick="openModal('TOEFL (Prediction Test)', 'https://lh3.googleusercontent.com/d/1_V3V2RuNsykYApkNeqtAEdifmbmjdj5a', 'Sertifikat kemampuan bahasa Inggris formal yang menunjukkan penguasaan tata bahasa, kemampuan mendengar, dan pemahaman bacaan standar profesional.')">
                 <i class="fa-solid fa-language"></i>
                 <h3>TOEFL Score Certification</h3>
                 <p>English Proficiency Test</p>
             </div>
-
-            
-
         </div>
     </section>
 
@@ -664,7 +726,11 @@
         <h2 class="section-title">Studi Kasus & Proyek</h2>
         <div class="projects-grid">
             
-            <div class="project-card" onclick="openModal('Analisis Keluhan & Troubleshooting TRING!', '', 'Proyek ini berfokus pada penanganan dan klasifikasi tiket keluhan pengguna pada aplikasi TRING! by Pegadaian. Meliputi analisis error log, identifikasi titik hambatan (UX friction), dan eskalasi penanganan masalah ke tim IT Developer untuk pemeliharaan sistem.')">
+            <div class="project-card" onclick="openModal(
+                'Analisis Keluhan & Troubleshooting TRING!', 
+                '', 
+                '<b>Deskripsi Proyek:</b><br>Proyek ini berfokus pada penanganan dan klasifikasi tiket keluhan pengguna pada aplikasi TRING! by Pegadaian selama kegiatan operasional di lapangan. Meliputi analisis error log, identifikasi titik hambatan (UX friction), dan eskalasi penanganan masalah ke tim IT Developer untuk pemeliharaan sistem.<br><br><b>Tanggung Jawab Utama (IT Support):</b><br>• <b>First-Line Troubleshooting:</b> Melakukan diagnosis awal terhadap kendala teknis pengguna (seperti gangguan koneksi, kegagalan sistem saat registrasi, atau error pada alur transaksi).<br>• <b>Analisis & Kategori Masalah:</b> Memilah apakah kendala disebabkan oleh perangkat/jaringan lokal, kesalahan input pengguna (user error), atau murni <i>bug</i> dari sistem aplikasi.<br>• <b>Eskalasi & Bug Reporting:</b> Menyusun laporan kendala secara terstruktur untuk diteruskan ke tim pengembang.<br><br><b>Hasil & Dampak:</b><br>Memastikan proses <i>onboarding</i> digital berjalan lancar, memangkas waktu tunggu penyelesaian masalah, serta membantu tim pengembang dalam memperbaiki error aplikasi secara akurat.'
+            )">
                 <div>
                     <h3>Analisis & Penanganan Kendala TRING!</h3>
                     <p class="project-description">Sistem pencatatan dan analisis tiket keluhan aplikasi seluler untuk mempercepat penanganan masalah teknis pengguna.</p>
@@ -697,19 +763,13 @@
             <h2 style="font-family: 'Cinzel', serif; margin-bottom: 1rem;">Mari Berdiskusi</h2>
             <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Saya siap bergabung sebagai IT Support / Technical Support untuk membantu kelancaran operasional sistem perusahaan Anda.</p>
             <div class="social-links">
-    
-    <a href="https://www.linkedin.com/in/sulastri-rui" target="_blank" class="social-btn">
-        <i class="fa-brands fa-linkedin"></i> LinkedIn
-    </a>
-    
-    <a href="mailto:rui.sulastri@gmail.com" class="social-btn">
-        <i class="fa-regular fa-envelope"></i> Email
-    </a>
-    
-    <!-- <a href="https://github.com/sulastri-rui" target="_blank" class="social-btn">
-        <i class="fa-brands fa-github"></i> GitHub
-    </a> -->
-</div>
+                <a href="https://www.linkedin.com/in/sulastri-rui" target="_blank" class="social-btn">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+                <a href="mailto:rui.sulastri@gmail.com" class="social-btn">
+                    <i class="fa-regular fa-envelope"></i> Email
+                </a>
+            </div>
         </div>
     </section>
 
@@ -727,14 +787,44 @@
         </div>
     </div>
 
-    <!-- JavaScript untuk Modal Interaktif -->
+    <!-- JavaScript Interaktif -->
     <script>
+        // Buka / Tutup Mobile Menu
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('sidebarOverlay');
+            const menuIcon = document.getElementById('menuIcon');
+
+            navLinks.classList.toggle('active');
+            overlay.classList.toggle('active');
+
+            if (navLinks.classList.contains('active')) {
+                menuIcon.className = 'fa-solid fa-xmark';
+            } else {
+                menuIcon.className = 'fa-solid fa-bars';
+            }
+        }
+
+        // Tutup Sidebar Secara Khusus
+        function closeMenu() {
+            const navLinks = document.getElementById('navLinks');
+            const overlay = document.getElementById('sidebarOverlay');
+            const menuIcon = document.getElementById('menuIcon');
+
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                overlay.classList.remove('active');
+                menuIcon.className = 'fa-solid fa-bars';
+            }
+        }
+
+        // Modal Handler (Render Format HTML dengan innerHTML)
         function openModal(title, imgSrc, description) {
             document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalDesc').innerText = description;
+            document.getElementById('modalDesc').innerHTML = description; 
             
             const imgEl = document.getElementById('modalImage');
-            if(imgSrc && imgSrc !== '') {
+            if(imgSrc && imgSrc.trim() !== '') {
                 imgEl.src = imgSrc;
                 imgEl.style.display = 'block';
             } else {
