@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio Sulastri - IT Support & Technical Specialist</title>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-deep: #0d0e12;
+            --bg-card: #16181d;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --primary-gold: #d4af37;
+            --accent-gold: #f3e5ab;
+            --text-main: #f1f2f6;
+            --text-muted: #94a3b8;
+            --shadow-glow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg-deep);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            z-index: 1000;
+            padding: 0.8rem 2rem;
+            background: rgba(22, 24, 29, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-main);
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--primary-gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-gold);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: auto; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6rem 1.5rem 3rem 1.5rem;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        .badge-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 span {
+            color: var(--primary-gold);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            font-size: 0.95rem;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary-gold);
+            color: #0d0e12;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-gold);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--card-border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
+
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 2px solid var(--card-border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+        }
+
+        /* ===== SECTION GLOBAL ===== */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(1.8rem, 4vw, 2.3rem);
+            margin-bottom: 3rem;
+            color: var(--text-main);
+            border-bottom: 2px solid var(--primary-gold);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        /* ===== EXPERIENCE ===== */
+        .experience-timeline {
+            border-left: 2px solid var(--card-border);
+            padding-left: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .experience-item {
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -39px;
+            top: 5px;
+            width: 14px;
+            height: 14px;
+            background: var(--primary-gold);
+            border-radius: 50%;
+            border: 4px solid var(--bg-deep);
+        }
+
+        .exp-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .exp-card:hover {
+            border-color: rgba(212, 175, 55, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .exp-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.3rem;
+        }
+
+        .exp-company {
+            color: var(--primary-gold);
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .exp-description {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .exp-gallery img {
+            width: 90px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .exp-gallery img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-gold);
+        }
+
+        /* ===== CERTIFICATES ===== */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            padding: 1.5rem;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .cert-card i {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 1rem;
+        }
+
+        .cert-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            padding: 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .project-card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+
+        .project-card h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tag {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-muted);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            border: 1px solid var(--card-border);
+        }
+
+        /* ===== MODAL POPUP (CENTRAL) ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(13, 14, 18, 0.85);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: var(--bg-card);
+            border: 1px solid var(--primary-gold);
+            width: 100%;
+            max-width: 650px;
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .modal-box {
+            transform: scale(1);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-gold);
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 8px;
+            margin-top: 1rem;
+            border: 1px solid var(--card-border);
+            background: #000;
+        }
+
+        .modal-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--primary-gold);
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT & FOOTER ===== */
+        .contact-container {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .social-btn {
+            padding: 0.8rem 1.5rem;
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--primary-gold);
+            color: #0d0e12;
+            border-color: var(--primary-gold);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--card-border);
+        }
+
+        @media (max-width: 768px) {
+        .hero {
+            padding: 5rem 1rem 2rem 1rem; 
+        }
+
+        .hero-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 1.5rem; 
+        }
+
+        .hero-image-container {
+            order: -1; 
+            margin-bottom: 0.5rem;
+        }
+
+        /* Mengatur ukuran foto profil khusus HP */
+        .hero-image {
+            max-width: 150px;
+            aspect-ratio: 1/1; 
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+    }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#home" class="logo">Sulastri<span>.</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certificates">Sertifikat</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="badge-status">
+                    <span class="status-dot"></span> Open for IT Support Roles
+                </div>
+                <p class="hero-subtitle">IT Support & Technical Specialist</p>
+                <h1>Hi, saya <span>Sulastri</span></h1>
+                <p>Profesional IT yang berfokus pada dukungan teknis tingkat pertama, manajemen perangkat/aplikasi, pemecahan masalah sistem, serta pendampingan teknis pengguna agar operasional digital berjalan lancar.</p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Hubungi Saya</a>
+                    <a href="#experience" class="btn btn-secondary">Lihat Pengalaman</a>
+                </div>
+            </div>
+            <div class="hero-image-container">
+                <img src="https://lh3.googleusercontent.com/d/13Z4ywqrUQU_vtMBHI51i1kx4yvJgwCBy" alt="Foto Profil Sulastri" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section (IT Support Update) -->
+    <section class="section" id="experience">
+        <h2 class="section-title">Pengalaman Kerja</h2>
+        <div class="experience-timeline">
+            
+            <div class="experience-item">
+                <div class="exp-card">
+                    <h3 class="exp-title">Pegadaian Digital Representative</h3>
+                    <span class="exp-company">PT Pegadaian (Persero) | Digitalization Internship</span>
+                    <p class="exp-description">
+                        Bertanggung jawab dalam mendampingi registrasi dan pendataan nasabah pada aplikasi digital Pegadaian Digital Service (PDS) & TRING!. Melakukan validasi awal data pengguna, pengujian alur transaksi manual (Manual Functional Testing), serta mendokumentasikan kendala (bugs/UX friction) yang dihadapi pengguna akhir untuk diserahkan ke tim IT developer.
+                    </p>
+                    <!-- <div class="exp-gallery">
+                        <img src="img/pegadaian1.jpg" alt="Dokumentasi Lapangan" onclick="openModal('Foto Dokumentasi Lapangan', 'img/pegadaian1.jpg', 'Kegiatan pendampingan teknis, edukasi aplikasi digital Pegadaian Digital Service (PDS) & TRING! di lapangan, serta validasi data awal nasabah.')">
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- <div class="experience-item">
+                <div class="exp-card">
+                    <h3 class="exp-title">Data Preprocessing & System Log Analysis</h3>
+                    <span class="exp-company">Riset Akademis Independen</span>
+                    <p class="exp-description">
+                        Membangun alur prapemrosesan teks keluhan dan log sistem secara terstruktur untuk mengklasifikasikan masalah pengguna. Memastikan data input bersih dan valid untuk analisis performa layanan sistem digital.
+                    </p>
+                </div>
+            </div> -->
+
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section class="section" id="certificates">
+        <h2 class="section-title">Sertifikasi & Lisensi</h2>
+        <div class="cert-grid">
+            
+            <div class="cert-card" onclick="openModal('Sertifikat Magang PT Pegadaian', 'https://lh3.googleusercontent.com/d/1VuXP5-Ezot6DwttZF4owUk41mILkIhoi', 'Sertifikat penyelesaian program magang di bidang digitalisasi dan dukungan operasional IT Pegadaian.')">
+                <i class="fa-solid fa-award"></i>
+                <h3>MAGENTA Internship</h3>
+                <p>PT Pegadaian (Persero)</p>
+            </div> 
+
+            <div class="cert-card" onclick="openModal('MTCNA (MikroTik Certified Network Associate)', 'https://lh3.googleusercontent.com/d/1c3jbL-BLym9I4qQ0dZhTXqUA_uIzJ0Tu', 'Sertifikasi resmi yang membuktikan kompetensi dalam konfigurasi router, routing, firewall, bridging, dan troubleshooting jaringan komputer.')">
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>MTCNA Certified</h3>
+                <p>MikroTik Certified Network Associate</p>
+            </div>
+            <div class="cert-card" onclick="openModal('BNSP (Network Administrator Madya)', 'https://lh3.googleusercontent.com/d/1TaAgPd3T1VBwiX5pCShmdKxcD9yoc7l8', 'Sertifikasi kompetensi resmi dari BNSP untuk bidang Network Administrator Madya, membuktikan keahlian dalam perancangan, pengelolaan, dan troubleshooting infrastruktur jaringan komputer skala menengah hingga besar.')">
+                <i class="fa-solid fa-server"></i>
+                <h3>Network Administrator Madya</h3>
+                <p>BNSP (Badan Nasional Sertifikasi Profesi)</p>
+            </div>
+            <div class="cert-card" onclick="openModal('Zahir (Sistem Basis Data)', 'https://lh3.googleusercontent.com/d/1hFd_dhB1TPhVA6WEXjYyEzJc6s328Mjd', 'Sertifikasi kompetensi dalam pengelolaan basis data.')">
+                <i class="fa-solid fa-database"></i>
+                <h3>Zahir Basis Data</h3>
+                <p>Pengelolaan & Administrasi Database</p>
+            </div>
+            <div class="cert-card" onclick="openModal('PCAP: Programming Essentials in Python', 'https://lh3.googleusercontent.com/d/1EDwU0BgBgzfIE09kTCgV9Tg8qwWJ4hAL', 'Sertifikasi tingkat Associate dari Python Institute yang menguji pemahaman mendalam tentang pemrograman berorientasi objek (OOP), struktur data, penanganan eksepsi (exception handling), pengolahan modul & paket, serta operasi file di Python.')">
+                <i class="fa-brands fa-python"></i>
+                <h3>PCAP™ Certified</h3>
+                <p>Certified Associate in Python Programming</p>
+            </div>
+            <div class="cert-card" onclick="openModal('IT Bootcamp (Software Development)', 'https://lh3.googleusercontent.com/d/1BXpiJ0IE1TZvdB9gfzXSiy-0a0NLqgqU', 'Sertifikat kelulusan intensive IT Bootcamp Software Development, mencakup pengembangan aplikasi web, penerapan logika pemrograman, serta kolaborasi tim menggunakan version control.')">
+                <i class="fa-solid fa-laptop-code"></i>
+                <h3>Software Development Bootcamp</h3>
+                <p>Intensive IT Training & Project Development</p>
+            </div>
+            <div class="cert-card" onclick="openModal('TOELF (Prediction Test)', 'https://lh3.googleusercontent.com/d/1_V3V2RuNsykYApkNeqtAEdifmbmjdj5a', 'Sertifikat kemampuan bahasa Inggris formal yang menunjukkan penguasaan tata bahasa, kemampuan mendengar, dan pemahaman bacaan standar profesional.')">
+                <i class="fa-solid fa-language"></i>
+                <h3>TOEFL Score Certification</h3>
+                <p>English Proficiency Test</p>
+            </div>
+
+            
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title">Studi Kasus & Proyek</h2>
+        <div class="projects-grid">
+            
+            <div class="project-card" onclick="openModal('Analisis Keluhan & Troubleshooting TRING!', '', 'Proyek ini berfokus pada penanganan dan klasifikasi tiket keluhan pengguna pada aplikasi TRING! by Pegadaian. Meliputi analisis error log, identifikasi titik hambatan (UX friction), dan eskalasi penanganan masalah ke tim IT Developer untuk pemeliharaan sistem.')">
+                <div>
+                    <h3>Analisis & Penanganan Kendala TRING!</h3>
+                    <p class="project-description">Sistem pencatatan dan analisis tiket keluhan aplikasi seluler untuk mempercepat penanganan masalah teknis pengguna.</p>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">IT Support</span>
+                    <span class="project-tag">Ticket Analysis</span>
+                    <span class="project-tag">Troubleshooting</span>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="openModal('Simulasi Topologi Jaringan & Troubleshooting', '', 'Perancangan jaringan komputer berbasis VLAN dan DHCP Server menggunakan Cisco Packet Tracer. Diuji melalui simulasi gangguan jalur (*link failure*) untuk menguji respons pemulihan jaringan.')">
+                <div>
+                    <h3>Troubleshooting Topologi Jaringan</h3>
+                    <p class="project-description">Simulasi perbaikan dan konfigurasi jaringan lokal (LAN) serta penanganan hambatan konektivitas.</p>
+                </div>
+                <div class="project-tags">
+                    <span class="project-tag">Networking</span>
+                    <span class="project-tag">Cisco Packet Tracer</span>
+                    <span class="project-tag">MTCNA</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="contact-container">
+            <h2 style="font-family: 'Cinzel', serif; margin-bottom: 1rem;">Mari Berdiskusi</h2>
+            <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto;">Saya siap bergabung sebagai IT Support / Technical Support untuk membantu kelancaran operasional sistem perusahaan Anda.</p>
+            <div class="social-links">
+    
+    <a href="https://www.linkedin.com/in/sulastri-rui" target="_blank" class="social-btn">
+        <i class="fa-brands fa-linkedin"></i> LinkedIn
+    </a>
+    
+    <a href="mailto:rui.sulastri@gmail.com" class="social-btn">
+        <i class="fa-regular fa-envelope"></i> Email
+    </a>
+    
+    <!-- <a href="https://github.com/sulastri-rui" target="_blank" class="social-btn">
+        <i class="fa-brands fa-github"></i> GitHub
+    </a> -->
+</div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Sulastri. Professional IT Support Portfolio.</p>
+    </footer>
+
+    <!-- GLOBAL POPUP MODAL -->
+    <div class="modal-overlay" id="globalModal" onclick="closeModal(event)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="forceCloseModal()">&times;</button>
+            <h3 class="modal-title" id="modalTitle">Judul</h3>
+            <img id="modalImage" class="modal-image" src="" alt="Detail Gambar" style="display: none;">
+            <p class="modal-text" id="modalDesc" style="margin-top: 1rem;">Deskripsi...</p>
+        </div>
+    </div>
+
+    <!-- JavaScript untuk Modal Interaktif -->
+    <script>
+        function openModal(title, imgSrc, description) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = description;
+            
+            const imgEl = document.getElementById('modalImage');
+            if(imgSrc && imgSrc !== '') {
+                imgEl.src = imgSrc;
+                imgEl.style.display = 'block';
+            } else {
+                imgEl.style.display = 'none';
+            }
+
+            document.getElementById('globalModal').classList.add('active');
+        }
+
+        function forceCloseModal() {
+            document.getElementById('globalModal').classList.remove('active');
+        }
+
+        function closeModal(event) {
+            if(event.target.id === 'globalModal') {
+                forceCloseModal();
+            }
+        }
+    </script>
+</body>
+</html>
